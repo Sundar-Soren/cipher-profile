@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Topbar = () => {
   return (
@@ -16,7 +17,9 @@ const Topbar = () => {
             <div class="text-xl">e81727@gmail.com</div>
           </div>
         </div>
-        <h1 className="font-bold text-lg cursor-pointer">0 Followers</h1>
+        <Link to="/followers">
+          <h1 className="font-bold text-lg cursor-pointer">0 Followers</h1>
+        </Link>
       </div>
     </div>
   );

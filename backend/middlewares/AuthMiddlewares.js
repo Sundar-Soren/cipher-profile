@@ -5,6 +5,7 @@ exports.isAuthenticated = async (req, res, next) => {
 
   if (!token) {
     return res.status(401).json({
+      status: false,
       error: "You Are Not Authorize To Access This Resource",
     });
   }

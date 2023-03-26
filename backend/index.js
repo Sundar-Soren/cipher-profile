@@ -4,8 +4,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:8800"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const userRoutes = require("./Routers/UserRouters");

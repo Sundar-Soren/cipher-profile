@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import ProfilePage from "./pages/ProfilePage";
+import FollowersList from "./pages/FollowersList";
 
 const App = () => {
   const Layout = () => {
@@ -21,7 +22,6 @@ const App = () => {
         <Navbar />
         <Sidebar />
         <div class="sm:ml-64  mt-14">
-          <Topbar />
           <Outlet />
         </div>
       </>
@@ -36,6 +36,10 @@ const App = () => {
         {
           path: "/",
           element: <ProfilePage />,
+        },
+        {
+          path: "/followers",
+          element: <FollowersList />,
         },
       ],
     },
