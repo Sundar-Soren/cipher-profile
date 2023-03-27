@@ -38,12 +38,7 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
-    socialMedia: [
-      {
-        name: String,
-        link: String,
-      },
-    ],
+    socialMedia: {},
     highesteducation: String,
     CurrentProfession: String,
     interests: [String],

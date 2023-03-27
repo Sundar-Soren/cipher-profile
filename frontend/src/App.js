@@ -14,11 +14,19 @@ import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import ProfilePage from "./pages/ProfilePage";
 import FollowersList from "./pages/FollowersList";
+import ChangePasswordModel from "./components/ChangePasswordModel";
+import InterestModel from "./components/InterestModel";
 
 const App = () => {
+  const [showModel, setShowModel] = useState(false);
+  const [showInterestModel, setShowInterestModel] = useState(true);
   const Layout = () => {
     return (
       <>
+        {showModel && <ChangePasswordModel setShowModel={setShowModel} />}
+        {showInterestModel && (
+          <InterestModel setShowInterestModel={setShowInterestModel} />
+        )}
         <Navbar />
         <Sidebar />
         <div class="sm:ml-64  mt-14">
@@ -35,7 +43,7 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <ProfilePage />,
+          element: <ProfilePage setShowModel={setShowModel} />,
         },
         {
           path: "/followers",

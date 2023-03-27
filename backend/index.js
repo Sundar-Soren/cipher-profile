@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:8800"],
+    origin: ["http://localhost:3000", "http://localhost:8000"],
     credentials: true,
   })
 );
