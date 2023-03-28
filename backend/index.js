@@ -5,6 +5,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 app.use(cookieParser());
 app.use(
   cors({
@@ -15,6 +16,8 @@ app.use(
 app.use(express.json());
 
 const userRoutes = require("./Routers/UserRouters");
+
+app.use(express.static(path.join(__dirname, "public")));
 
 const DATABASE_URL = process.env.DATABASE;
 mongoose
@@ -31,4 +34,5 @@ mongoose
 
 app.use("/api", userRoutes);
 
+app.get("/*", express.static(path.join(__dirname, "build")));
 app.listen(8000, () => console.log("Server is running on 8000 port"));
