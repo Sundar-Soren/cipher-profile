@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const URL = "http://localhost:8000/";
-// const URL = "https://cipher-profile.vercel.app/";
+// const URL = "http://localhost:8000/";
+const URL = "https://cipher-profile.vercel.app/";
 
 const newRequest = axios.create({
   headers: {
