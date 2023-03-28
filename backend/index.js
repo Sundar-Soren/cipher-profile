@@ -9,7 +9,11 @@ const path = require("path");
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:8000"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:8000",
+      "https://cipher-profile.vercel.app",
+    ],
     credentials: true,
   })
 );
