@@ -21,7 +21,7 @@ app.use(express.json());
 
 const userRoutes = require("./Routers/UserRouters");
 
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 const DATABASE_URL = process.env.DATABASE;
 mongoose
@@ -38,7 +38,7 @@ mongoose
 
 app.use("/api", userRoutes);
 
-app.get("/*", express.static(path.join(__dirname, "build")));
+// app.get("/*", express.static(path.join(__dirname, "build")));
 app.listen(process.env.PORT || 8000, () =>
   console.log("Server is running on 8000 port")
 );
