@@ -39,4 +39,6 @@ mongoose
 app.use("/api", userRoutes);
 
 app.get("/*", express.static(path.join(__dirname, "build")));
-app.listen(8000, () => console.log("Server is running on 8000 port"));
+app.listen(process.env.PORT || 8000, () =>
+  console.log("Server is running on 8000 port")
+);
