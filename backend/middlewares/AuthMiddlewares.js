@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
 const IUser = require("../models/UserModels");
 exports.isAuthenticated = async (req, res, next) => {
-  const { token } = req.cookies;
-
+  const token = req.headers["authorization"];
   if (!token) {
     return res.status(401).json({
       status: false,
@@ -10,8 +9,8 @@ exports.isAuthenticated = async (req, res, next) => {
     });
   }
 
-  const decodeToken = jwt.verify(token, process.env.JWT_SECRET);
   try {
+    const decodeToken = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await IUser.findById(decodeToken.id);
     next();
   } catch (error) {

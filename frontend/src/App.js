@@ -29,6 +29,8 @@ const App = () => {
         email: "sundarsoren@gmail.com",
         password: "12345678",
       });
+      localStorage.setItem("access_token", data.token);
+      console.log(data);
       setUser(data.user);
     } catch (error) {
       console.log(error);
@@ -37,7 +39,11 @@ const App = () => {
 
   const amILogin = async () => {
     try {
-      const { data } = await newRequest.get("me");
+      const { data } = await newRequest.get("me", {
+        headers: {
+          Authorization: localStorage.getItem("access_token"),
+        },
+      });
       setUser(data.user);
     } catch (error) {
       console.log(error.response.data.status);
