@@ -13,6 +13,7 @@ app.use(
       "http://localhost:3000",
       "http://localhost:8000",
       "https://cipher-profile.vercel.app",
+      "https://amazing-faun-7a25b9.netlify.app",
     ],
     credentials: true,
   })
