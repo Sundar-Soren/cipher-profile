@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import newRequest from "../utils/newRequest";
 
-const InterestModel = ({ setShowInterestModel }) => {
-  const arr = ["App development", "Web development"];
-  // const [isSelected, setIsSelected] = useState({App_Development:true})
+const InterestModel = ({ user, setUser, setShowInterestModel }) => {
+  const [interests, setInterests] = useState(user?.interests);
+
+  const handleClick = (interest) =>
+    interests.includes(interest)
+      ? setInterests(interests.filter((item) => item !== interest))
+      : setInterests([...interests, interest]);
+
+  const updateUser = async () => {
+    try {
+      const { data } = await newRequest.put("user/update", {
+        interests: interests,
+      });
+      setUser(data.updateUser);
+      setShowInterestModel(false);
+    } catch (error) {
+      console.log(error);
+      setShowInterestModel(false);
+    }
+  };
+
+  console.log(interests);
   return (
     <div className=" h-screen w-screen fixed z-50 top-0 backdrop-blur-sm bg-white/30 flex items-center justify-center">
       <div class="overflow-x-hidden overflow-y-auto">
@@ -32,44 +52,89 @@ const InterestModel = ({ setShowInterestModel }) => {
             <div class="grid grid-cols-2 gap-4">
               <div
                 className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
-                  arr.includes("App development")
+                  interests?.includes("App Development")
                     ? "bg-amber-500"
                     : "bg-slate-300"
                 }`}
+                onClick={() => handleClick("App Development")}
               >
                 <button>App Development</button>
               </div>
               <div
                 className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
-                  arr.includes("Web development")
+                  interests?.includes("Game Development")
                     ? "bg-amber-500"
                     : "bg-slate-300"
                 }`}
+                onClick={() => handleClick("Game Development")}
               >
-                <button>Web development</button>
+                <button>Game Development</button>
               </div>
-              <div className="bg-slate-300 text-center text-white font-semibold py-1 rounded">
-                <button>App Development</button>
-              </div>
-              <div className="bg-slate-300 text-center text-white font-semibold py-1 rounded">
+              <div
+                className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
+                  interests?.includes("Web Development")
+                    ? "bg-amber-500"
+                    : "bg-slate-300"
+                }`}
+                onClick={() => handleClick("Web Development")}
+              >
                 <button>Web Development</button>
               </div>
-              <div className="bg-slate-300 text-center text-white font-semibold py-1 rounded">
-                <button>App Development</button>
+              <div
+                className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
+                  interests?.includes("Data Structures")
+                    ? "bg-amber-500"
+                    : "bg-slate-300"
+                }`}
+                onClick={() => handleClick("Data Structures")}
+              >
+                <button>Data Structures</button>
               </div>
-              <div className="bg-slate-300 text-center text-white font-semibold py-1 rounded">
-                <button>App Development</button>
+              <div
+                className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
+                  interests?.includes("Programming")
+                    ? "bg-amber-500"
+                    : "bg-slate-300"
+                }`}
+                onClick={() => handleClick("Programming")}
+              >
+                <button>Programming</button>
               </div>
-              <div className="bg-slate-300 text-center text-white font-semibold py-1 rounded">
-                <button>App Development</button>
+              <div
+                className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
+                  interests?.includes("Machine Learning")
+                    ? "bg-amber-500"
+                    : "bg-slate-300"
+                }`}
+                onClick={() => handleClick("Machine Learning")}
+              >
+                <button>Machine Learning</button>
               </div>
-              <div className="bg-slate-300 text-center text-white font-semibold py-1 rounded">
-                <button>App Development</button>
+              <div
+                className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
+                  interests?.includes("Data Science")
+                    ? "bg-amber-500"
+                    : "bg-slate-300"
+                }`}
+                onClick={() => handleClick("Data Science")}
+              >
+                <button>Data Science</button>
+              </div>
+              <div
+                className={`text-center text-white font-semibold py-1 rounded cursor-pointer ${
+                  interests?.includes("Others")
+                    ? "bg-amber-500"
+                    : "bg-slate-300"
+                }`}
+                onClick={() => handleClick("Others")}
+              >
+                <button>Others</button>
               </div>
             </div>
             <button
               type="submit"
               class=" w-full mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+              onClick={() => updateUser()}
             >
               Save
             </button>

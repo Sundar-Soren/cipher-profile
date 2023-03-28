@@ -128,3 +128,43 @@ exports.updateUser = async (req, res) => {
     });
   }
 };
+exports.updatePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({
+        error: "Please Enter old Password and new Password",
+      });
+    }
+    const user = req.user;
+    const isPasswordMatch = await user.comparePassword(oldPassword);
+    console.log("isPasswordMatch");
+    if (!isPasswordMatch) {
+      return res.status(401).json({
+        error: "Old Password Not Match",
+      });
+    }
+
+    user.password = req.body.newPassword;
+    await user.save();
+    return res.status(200).json({
+      message: "Password changed successfully",
+    });
+  } catch (error) {
+    return res.status(501).json({
+      error: "Failed to change the password",
+    });
+  }
+};
+
+exports.getFollowers = async (req, res) => {
+  try {
+    const followers = await IUser.find({ _id: { $in: req.user.followers } });
+    res.json(followers);
+  } catch (error) {
+    return res.status(401).json({
+      error: error.message,
+    });
+  }
+};

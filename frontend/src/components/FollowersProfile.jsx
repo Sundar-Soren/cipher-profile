@@ -1,6 +1,7 @@
 import React from "react";
 
-const FollowersProfile = () => {
+const FollowersProfile = ({ follower }) => {
+  console.log(follower);
   return (
     <div>
       <div class="w-full bg-slate-50 border border-gray-200 rounded-lg shadow">
@@ -11,7 +12,9 @@ const FollowersProfile = () => {
             src="https://images.pexels.com/photos/5905497/pexels-photo-5905497.jpeg?auto=compress&cs=tinysrgb&w=600"
             alt="Bonnie image"
           />
-          <h5 class="mb-1 text-xl font-medium text-gray-900 ">Bonnie Green</h5>
+          <h5 class="mb-1 text-xl font-medium text-gray-900 ">
+            {follower.firstName} {follower.lastName}
+          </h5>
           <span class="text-sm text-gray-500">Visual Designer</span>
           <span class="text-sm text-gray-500">0 Followers</span>
           <div class="flex mt-2 space-x-2 md:mt-4">

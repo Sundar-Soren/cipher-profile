@@ -16,16 +16,48 @@ import ProfilePage from "./pages/ProfilePage";
 import FollowersList from "./pages/FollowersList";
 import ChangePasswordModel from "./components/ChangePasswordModel";
 import InterestModel from "./components/InterestModel";
+import newRequest from "./utils/newRequest";
 
 const App = () => {
   const [showModel, setShowModel] = useState(false);
-  const [showInterestModel, setShowInterestModel] = useState(true);
+  const [showInterestModel, setShowInterestModel] = useState(false);
+
+  const [user, setUser] = useState({});
+  const makeUserLogin = async () => {
+    try {
+      const { data } = await newRequest.post("login", {
+        email: "sundarsoren@gmail.com",
+        password: "12345678",
+      });
+      setUser(data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const amILogin = async () => {
+    try {
+      const { data } = await newRequest.get("me");
+      setUser(data.user);
+    } catch (error) {
+      console.log(error.response.data.status);
+      if (error.response?.data?.status === false) makeUserLogin();
+    }
+  };
+
+  useEffect(() => {
+    amILogin();
+  }, []);
   const Layout = () => {
     return (
       <>
         {showModel && <ChangePasswordModel setShowModel={setShowModel} />}
         {showInterestModel && (
-          <InterestModel setShowInterestModel={setShowInterestModel} />
+          <InterestModel
+            setShowInterestModel={setShowInterestModel}
+            user={user}
+            setUser={setUser}
+          />
         )}
         <Navbar />
         <Sidebar />
@@ -43,7 +75,14 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <ProfilePage setShowModel={setShowModel} />,
+          element: (
+            <ProfilePage
+              user={user}
+              setUser={setUser}
+              setShowModel={setShowModel}
+              setShowInterestModel={setShowInterestModel}
+            />
+          ),
         },
         {
           path: "/followers",

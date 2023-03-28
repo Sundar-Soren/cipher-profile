@@ -5,6 +5,8 @@ const {
   userLogout,
   getLoggedInUser,
   updateUser,
+  updatePassword,
+  getFollowers,
 } = require("../controllers/UserControllers");
 const { isAuthenticated } = require("../middlewares/AuthMiddlewares");
 const router = express.Router();
@@ -17,5 +19,7 @@ router.get("/logout", userLogout);
 //Logged user
 router.get("/me", isAuthenticated, getLoggedInUser);
 router.put("/user/update", isAuthenticated, updateUser);
+router.put("/password", isAuthenticated, updatePassword);
+router.get("/followers", isAuthenticated, getFollowers);
 
 module.exports = router;

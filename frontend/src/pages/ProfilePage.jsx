@@ -9,33 +9,7 @@ import SocialMediaLinks from "../components/SocialMediaLinks";
 import Topbar from "../components/Topbar";
 import newRequest from "../utils/newRequest";
 
-const ProfilePage = ({ setShowModel }) => {
-  const [user, setUser] = useState({});
-  const makeUserLogin = async () => {
-    try {
-      const { data } = await newRequest.post("login", {
-        email: "sundarsoren@gmail.com",
-        password: "12345678",
-      });
-      setUser(data.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const amILogin = async () => {
-    try {
-      const { data } = await newRequest.get("me");
-      setUser(data.user);
-    } catch (error) {
-      console.log(error.response.data.status);
-      if (error.response?.data?.status === false) makeUserLogin();
-    }
-  };
-
-  useEffect(() => {
-    amILogin();
-  }, []);
+const ProfilePage = ({ user, setUser, setShowModel, setShowInterestModel }) => {
   return (
     <>
       <Topbar user={user} setUser={setUser} />
@@ -45,7 +19,11 @@ const ProfilePage = ({ setShowModel }) => {
         <SocialMediaLinks user={user} setUser={setUser} />
         <PI user={user} setUser={setUser} />
         <PasswordAndSecurity setShowModel={setShowModel} />
-        <Interests user={user} />
+        <Interests
+          user={user}
+          setUser={setUser}
+          setShowInterestModel={setShowInterestModel}
+        />
       </div>
     </>
   );
