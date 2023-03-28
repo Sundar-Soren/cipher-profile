@@ -12,7 +12,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:8000",
-      "https://cipher-profile.vercel.app/",
+      "https://cipher-profile.vercel.app",
     ],
     credentials: true,
   })
